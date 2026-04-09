@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-geist-sans: "Geist Sans", system-ui, sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+}
+
+body {
+  font-family: var(--font-geist-sans);
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+/* Drag-and-drop ghost */
+[draggable="true"] {
+  cursor: grab;
+}
+[draggable="true"]:active {
+  cursor: grabbing;
+  opacity: 0.7;
+}
+
+/* Compliance pulse */
+@keyframes conflict-pulse {
+  0%, 100% { border-color: #E24B4A; }
+  50% { border-color: #F09595; }
+}
+.conflict-pill {
+  animation: conflict-pulse 1s infinite;
+  background: #FCEBEB;
+  color: #791F1F;
+  border-color: #E24B4A;
+}
