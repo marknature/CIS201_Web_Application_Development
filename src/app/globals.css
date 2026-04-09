@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── FFIMS Design Tokens ─────────────────────────────────────── */
+:root {
+  --red:       #CC0000;
+  --red-light: #E1C7C7;
+  --dark:      #1A1A1A;
+  --white:     #FFFFFF;
+  --bg:        #F9FAFB;
+  --gray-100:  #F3F4F6;
+  --gray-200:  #E5E7EB;
+  --gray-500:  #6B7280;
+  --gray-700:  #374151;
+  --success:   #22C55E;
+  --warning:   #FACC15;
+  --error:     #EF4444;
+  --info:      #3B82F6;
+
+  /* 8px grid spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --page-padding: 24px;
+  --card-padding: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography Scale ────────────────────────────────────────── */
+/* Page titles: 20-24px semi-bold */
+.text-page-title { font-size: 22px; font-weight: 600; color: var(--dark); }
+/* Section headers: 16-18px medium */
+.text-section { font-size: 17px; font-weight: 500; color: var(--dark); }
+/* Body: 13-14px regular */
+.text-body { font-size: 14px; font-weight: 400; color: var(--gray-700); }
+/* Table text: 12-13px */
+.text-table { font-size: 13px; font-weight: 400; }
+/* Status labels: 11-12px medium uppercase */
+.text-status { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ── Shift pills / status chips ─────────────────────────────── */
+.chip { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+.chip-duty     { background: #DCFCE7; color: #166534; }
+.chip-standby  { background: #DBEAFE; color: #1E40AF; }
+.chip-leave    { background: #FEF9C3; color: #854D0E; }
+.chip-rest     { background: #F3F4F6; color: #4B5563; }
+.chip-ot       { background: #FEE2E2; color: #991B1B; }
+.chip-conflict { background: #FEE2E2; color: #991B1B; border: 1px solid #EF4444; animation: conflict-pulse 1s infinite; }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px; border-radius: 7px; font-size: 13px; font-weight: 500; cursor: pointer; transition: opacity 0.15s, background 0.15s; border: none; }
+.btn-primary   { background: var(--red); color: #fff; }
+.btn-primary:hover { opacity: 0.9; }
+.btn-secondary { background: transparent; color: var(--dark); border: 1px solid var(--gray-200); }
+.btn-secondary:hover { background: var(--gray-100); }
+.btn-success   { background: #22C55E; color: #fff; }
+.btn-success:hover { opacity: 0.9; }
+.btn-danger    { background: #EF4444; color: #fff; }
+.btn-danger:hover { opacity: 0.9; }
+.btn-sm { height: 30px; padding: 0 12px; font-size: 12px; }
+
+/* ── Cards ───────────────────────────────────────────────────── */
+.card { background: #fff; border-radius: 8px; border: 1px solid var(--gray-200); padding: var(--card-padding); }
+
+/* ── Tables ──────────────────────────────────────────────────── */
+.ffims-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ffims-table thead th { background: var(--gray-100); color: var(--gray-500); font-weight: 500; font-size: 12px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--gray-200); }
+.ffims-table tbody tr { border-bottom: 1px solid var(--gray-200); transition: background 0.1s; }
+.ffims-table tbody tr:last-child { border-bottom: none; }
+.ffims-table tbody tr:hover { background: var(--gray-100); }
+.ffims-table tbody td { padding: 10px 14px; color: var(--gray-700); vertical-align: middle; }
+
+/* ── Form inputs ─────────────────────────────────────────────── */
+.ffims-input { height: 36px; border: 1px solid var(--gray-200); border-radius: 6px; padding: 0 12px; font-size: 14px; color: var(--dark); width: 100%; outline: none; transition: border-color 0.15s; }
+.ffims-input:focus { border-color: var(--info); box-shadow: 0 0 0 2px rgba(59,130,246,0.15); }
+.ffims-input::placeholder { color: var(--gray-500); }
+
+/* ── Drag and drop ───────────────────────────────────────────── */
+[draggable="true"] { cursor: grab; }
+[draggable="true"]:active { cursor: grabbing; opacity: 0.6; }
+.drop-over { background: #FEF2F2 !important; outline: 2px dashed var(--red); outline-offset: -2px; }
+
+/* ── Red left accent (KPI cards) ────────────────────────────── */
+.accent-left { border-left: 4px solid var(--red); }
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes conflict-pulse {
+  0%, 100% { border-color: #EF4444; }
+  50% { border-color: #FCA5A5; }
+}
