@@ -1,0 +1,33 @@
+.supervisor-page {
+  min-height: 100vh;
+  background: white;
+  color: #1f2937;
+  padding: 24px;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  letter-spacing: .2em;
+  color: #3b82f6;
+  font-size: .8rem;
+  margin: 0 0 6px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #111827;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #6b7280;
+}

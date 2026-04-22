@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FFIMS — Supervisor Dashboard | Africa University</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    background: #ffffff;
+    color: #1a1a18;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* AU Banner */
+  .au-banner {
+    background: #CC0000;
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .au-banner-name {
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: .04em;
+  }
+
+  .au-banner-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,.4);
+  }
+
+  .au-banner-title {
+    color: #ffffff;
+    font-size: .88rem;
+    font-weight: 400;
+    opacity: .92;
+  }
+
+  .au-banner-right { margin-left: auto; }
+
+  .au-pill {
+    background: rgba(255,255,255,.22);
+    color: #ffffff;
+    font-size: .75rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 99px;
+    letter-spacing: .04em;
+  }
+
+  .au-stripe { height: 4px; background: #1a1a18; }
+
+  /* Page */
+  .supervisor-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 24px 48px;
+  }
+
+  /* Topbar */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    letter-spacing: .18em;
+    color: #CC0000;
+    font-size: .72rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .topbar h1 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 600;
+    color: #1a1a18;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+  }
+
+  .subtitle { margin-top: 6px; color: #6b6b66; font-size: .875rem; }
+
+  .header-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; margin-top: 4px; }
+
+  .action-btn {
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: .85rem; font-weight: 500;
+    padding: 8px 16px; border-radius: 8px;
+    border: 1px solid #e2e1da;
+    background: #ffffff; color: #1a1a18;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, transform .1s;
+  }
+  .action-btn:hover { background: #f7f7f5; border-color: #888; }
+  .action-btn:active { transform: scale(.97); }
+  .action-btn.primary { background: #CC0000; color: #fff; border-color: #CC0000; }
+  .action-btn.primary:hover { background: #a30000; border-color: #a30000; }
+  .theme-toggle { width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid #e2e1da;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    transition: box-shadow .15s;
+  }
+  .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+
+  .stat-card { padding: 20px 22px 18px; border-top: 3px solid #CC0000; }
+  .stat-card p { font-size: .78rem; font-weight: 500; color: #6b6b66; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; }
+  .stat-card h2 { font-size: 2rem; font-weight: 600; color: #1a1a18; letter-spacing: -.03em; line-height: 1; margin-bottom: 6px; }
+  .stat-card span { font-size: .78rem; color: #6b6b66; }
+
+  /* Content grid */
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 680px) { .content-grid { grid-template-columns: 1fr; } }
+
+  .panel { padding: 22px; }
+  .panel h3 {
+    font-size: .78rem; font-weight: 600; color: #6b6b66;
+    letter-spacing: .06em; text-transform: uppercase;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid #e2e1da;
+  }
+
+  /* Lists */
+  .task-list, .team-list { display: flex; flex-direction: column; gap: 10px; }
+  .task-item, .team-item {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; padding: 12px 14px;
+    background: #f7f7f5; border: 1px solid #e2e1da;
+    border-radius: 8px; transition: border-left .15s, padding-left .15s;
+  }
+  .task-item:hover, .team-item:hover { border-left: 3px solid #CC0000; padding-left: 11px; }
+  .task-item strong, .team-item strong { font-size: .875rem; font-weight: 500; color: #1a1a18; display: block; margin-bottom: 2px; }
+  .task-item p, .team-item p { font-size: .78rem; color: #6b6b66; }
+
+  /* Badges */
+  .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: .72rem; font-weight: 600; letter-spacing: .02em; white-space: nowrap; flex-shrink: 0; }
+  .badge.in-progress { background: #fff0f0; color: #CC0000; }
+  .badge.pending     { background: #fffbeb; color: #b45309; }
+  .badge.completed   { background: #f0fdf4; color: #15803d; }
+  .badge.working     { background: #f0fdf4; color: #15803d; }
+  .badge.on-break    { background: #fffbeb; color: #b45309; }
+  .badge.absent      { background: #fef2f2; color: #dc2626; }
+
+  /* Progress */
+  .progress-block { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 12px; margin-bottom: 16px; }
+  .progress-block:last-child { margin-bottom: 0; }
+  .progress-block label { font-size: .845rem; font-weight: 500; color: #1a1a18; }
+  .progress-block span { font-family: 'DM Mono', monospace; font-size: .78rem; color: #6b6b66; grid-column: 2; grid-row: 1 / 3; align-self: center; }
+  .progress-bar { height: 7px; background: #e5e7eb; border-radius: 99px; overflow: hidden; }
+  .progress-bar div { height: 100%; background: #CC0000; border-radius: 99px; transition: width .7s cubic-bezier(.4,0,.2,1); }
+
+  /* Modal */
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 100; align-items: center; justify-content: center; }
+  .modal-backdrop.open { display: flex; }
+  .modal { background: #ffffff; border: 1px solid #e2e1da; border-radius: 16px; box-shadow: 0 24px 64px rgba(0,0,0,.15); padding: 28px; width: min(420px, 90vw); animation: pop .18s ease; }
+  @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .modal-header .dot { width: 10px; height: 10px; border-radius: 50%; background: #CC0000; }
+  .modal h4 { font-size: 1.1rem; font-weight: 600; color: #1a1a18; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: .78rem; font-weight: 500; color: #6b6b66; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 5px; }
+  .field input, .field select { width: 100%; font-family: 'DM Sans', Arial, sans-serif; font-size: .875rem; padding: 9px 12px; background: #f7f7f5; border: 1px solid #e2e1da; border-radius: 8px; color: #1a1a18; outline: none; transition: border-color .15s; }
+  .field input:focus, .field select:focus { border-color: #CC0000; }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+
+  /* Footer */
+  .au-footer { text-align: center; margin-top: 40px; font-size: .75rem; color: #6b6b66; padding-top: 20px; border-top: 1px solid #e2e1da; }
+  .au-footer strong { color: #CC0000; }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .stats-grid .card { animation: fadeUp .3s ease both; }
+  .stats-grid .card:nth-child(1) { animation-delay: .05s; }
+  .stats-grid .card:nth-child(2) { animation-delay: .10s; }
+  .stats-grid .card:nth-child(3) { animation-delay: .15s; }
+  .stats-grid .card:nth-child(4) { animation-delay: .20s; }
+  .content-grid .card { animation: fadeUp .3s .25s ease both; }
+  .supervisor-page > section.card { animation: fadeUp .3s .32s ease both; }
+</style>
+</head>
+<body>
+
+<!-- AU Banner — no logo, just text -->
+<div class="au-banner">
+  <span class="au-banner-name">AFRICA UNIVERSITY</span>
+  <div class="au-banner-divider"></div>
+  <span class="au-banner-title">Facilities &amp; Infrastructure Management System</span>
+  <div class="au-banner-right">
+    <span class="au-pill">Mutare Campus</span>
+  </div>
+</div>
+<div class="au-stripe"></div>
+
+<!-- Dashboard -->
+<div class="supervisor-page">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">FFIMS</p>
+      <h1>Supervisor Dashboard</h1>
+      <p class="subtitle">Monitor tasks, team performance, and project progress • <span id="today-date"></span></p>
+    </div>
+    <div class="header-actions">
+      <button class="action-btn primary" onclick="openModal()">+ New Task</button>
+      <button class="action-btn theme-toggle" id="theme-btn" title="Toggle theme" onclick="toggleDark()">🌙</button>
+    </div>
+  </header>
+
+  <section class="stats-grid" id="stats-grid"></section>
+
+  <section class="content-grid">
+    <div class="card panel">
+      <h3>Today's Tasks</h3>
+      <div class="task-list" id="task-list"></div>
+    </div>
+    <div class="card panel">
+      <h3>Team Status</h3>
+      <div class="team-list" id="team-list"></div>
+    </div>
+  </section>
+
+  <section class="card panel">
+    <h3>Project Progress</h3>
+    <div id="progress-list"></div>
+  </section>
+
+  <footer class="au-footer">
+    <strong>Africa University</strong> — FFIMS · Facilities &amp; Infrastructure Management System · CS 3.1 Mutare Campus
+  </footer>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" id="modal" onclick="handleBackdropClick(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="dot"></div>
+      <h4>New Task</h4>
+    </div>
+    <div class="field">
+      <label>Title</label>
+      <input type="text" id="task-title" placeholder="e.g. Inspect Building B lighting"/>
+    </div>
+    <div class="field">
+      <label>Owner</label>
+      <select id="task-owner">
+        <option>John</option><option>Mary</option><option>Brian</option>
+        <option>Tendai</option><option>Supervisor</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Due</label>
+      <input type="text" id="task-due" placeholder="e.g. Today, 3 PM, Tomorrow"/>
+    </div>
+    <div class="modal-actions">
+      <button class="action-btn" onclick="closeModal()">Cancel</button>
+      <button class="action-btn primary" onclick="addTask()">Add Task</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const stats = [
+    { label: "Tasks Completed", value: "75%",  note: "Up 8% from last week" },
+    { label: "Team Online",     value: "8/12", note: "3 on break, 1 absent" },
+    { label: "Overdue Tasks",   value: "3",    note: "Needs attention today" },
+    { label: "Active Projects", value: "5",    note: "2 due this week" },
+  ];
+  let tasks = [
+    { title: "Inspect Building A lighting",      status: "In Progress", owner: "John",       due: "Today" },
+    { title: "Approve maintenance request #204", status: "Pending",     owner: "Supervisor", due: "2 PM" },
+    { title: "Review shift report",              status: "Completed",   owner: "Mary",       due: "Done" },
+  ];
+  const team = [
+    { name: "John",   role: "Technician", status: "Working"  },
+    { name: "Mary",   role: "Cleaner",    status: "Working"  },
+    { name: "Brian",  role: "Driver",     status: "On Break" },
+    { name: "Tendai", role: "Assistant",  status: "Absent"   },
+  ];
+  const progress = [
+    { label: "Maintenance Schedule", pct: 68 },
+    { label: "Daily Inspections",    pct: 84 },
+    { label: "Report Review",        pct: 52 },
+  ];
+
+  document.getElementById('today-date').textContent =
+    new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+  document.getElementById('stats-grid').innerHTML =
+    stats.map(s => `<div class="card stat-card"><p>${s.label}</p><h2>${s.value}</h2><span>${s.note}</span></div>`).join('');
+
+  function renderTasks() {
+    document.getElementById('task-list').innerHTML = tasks.map(t => {
+      const cls = t.status.toLowerCase().replace(/ /g, '-');
+      return `<div class="task-item"><div><strong>${t.title}</strong><p>${t.owner} • Due ${t.due}</p></div><span class="badge ${cls}">${t.status}</span></div>`;
+    }).join('');
+  }
+  renderTasks();
+
+  document.getElementById('team-list').innerHTML = team.map(p => {
+    const cls = p.status.toLowerCase().replace(/ /g, '-');
+    return `<div class="team-item"><div><strong>${p.name}</strong><p>${p.role}</p></div><span class="badge ${cls}">${p.status}</span></div>`;
+  }).join('');
+
+  document.getElementById('progress-list').innerHTML = progress.map(p =>
+    `<div class="progress-block"><label>${p.label}</label><div class="progress-bar"><div style="width:${p.pct}%"></div></div><span>${p.pct}%</span></div>`
+  ).join('');
+
+  let isDark = false;
+  const themeBtn = document.getElementById('theme-btn');
+  function toggleDark() {
+    isDark = !isDark;
+    document.body.style.background = isDark ? '#111110' : '#ffffff';
+    document.body.style.color      = isDark ? '#e8e8e2' : '#1a1a18';
+    themeBtn.textContent = isDark ? '☀️' : '🌙';
+  }
+
+  function openModal()  { document.getElementById('modal').classList.add('open'); }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  function handleBackdropClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+  function addTask() {
+    const title = document.getElementById('task-title').value.trim();
+    const owner = document.getElementById('task-owner').value;
+    const due   = document.getElementById('task-due').value.trim() || 'TBD';
+    if (!title) { document.getElementById('task-title').focus(); return; }
+    tasks.unshift({ title, status: 'Pending', owner, due });
+    renderTasks();
+    document.getElementById('task-title').value = '';
+    document.getElementById('task-due').value = '';
+    closeModal();
+  }
+</script>
+</body>
+</html>
