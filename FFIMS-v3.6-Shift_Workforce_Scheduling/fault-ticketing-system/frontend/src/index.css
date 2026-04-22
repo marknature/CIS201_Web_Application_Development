@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 97%;
+    --foreground: 220 14% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 12%;
+
+    --primary: 0 100% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 8% 12%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 95%;
+    --muted-foreground: 220 9% 39%;
+
+    --accent: 210 20% 95%;
+    --accent-foreground: 220 14% 12%;
+
+    --destructive: 0 100% 40%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 63% 38%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 45 97% 52%;
+    --warning-foreground: 220 14% 12%;
+
+    --info: 211 88% 48%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 218 19% 88%;
+    --input: 218 19% 88%;
+    --ring: 0 100% 40%;
+
+    --radius: 1rem;
+
+    --chart-1: 0 100% 40%;
+    --chart-2: 211 88% 48%;
+    --chart-3: 145 63% 38%;
+    --chart-4: 45 97% 52%;
+    --chart-5: 220 9% 39%;
+
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 92%;
+    --sidebar-primary: 0 100% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 100% 40%;
+    --sidebar-muted: 0 0% 65%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", Calibri, sans-serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at top left, rgba(204, 0, 0, 0.1), transparent 26%),
+      radial-gradient(circle at bottom right, rgba(26, 26, 26, 0.04), transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(243, 245, 248, 0.98));
+    background-attachment: fixed;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: inherit;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: rgba(204, 0, 0, 0.16);
+  }
+}
+
+@layer components {
+  .ffims-panel {
+    @apply rounded-[24px] border border-[#e4e8ef] bg-white shadow-[0_20px_45px_-32px_rgba(26,26,26,0.35)];
+  }
+
+  .ffims-panel-muted {
+    @apply rounded-[20px] border border-transparent bg-[#f5f6f8];
+  }
+
+  .ffims-kicker {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-muted-foreground;
+  }
+
+  .ffims-meta-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-[#d8dde6] bg-white px-3 py-2 text-[12px] font-medium text-muted-foreground;
+  }
+
+  .ffims-soft-divider {
+    @apply border-t border-dashed border-[#d9dee6];
+  }
+}
+
+@layer utilities {
+  .ffims-page-title {
+    @apply text-[24px] font-semibold tracking-tight;
+  }
+
+  .ffims-section-title {
+    @apply text-[18px] font-semibold;
+  }
+
+  .ffims-body-text {
+    @apply text-[14px] leading-7;
+  }
+
+  .ffims-table-text {
+    @apply text-[13px];
+  }
+
+  .ffims-gradient-accent {
+    background-image: linear-gradient(135deg, rgba(204, 0, 0, 0.14), rgba(204, 0, 0, 0.03));
+  }
+}
