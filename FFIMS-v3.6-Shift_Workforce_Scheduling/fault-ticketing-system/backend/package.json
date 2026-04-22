@@ -1,0 +1,38 @@
+{
+  "name": "fault-ticket-backend",
+  "version": "1.0.0",
+  "description": "Fault Reporting and Ticketing backend API module",
+  "main": "server.js",
+  "scripts": {
+    "db:init": "node src/utils/initDb.js",
+    "dev": "nodemon server.js",
+    "dev:memory": "set MONGODB_IN_MEMORY=true&& nodemon server.js",
+    "smoke": "node tests/smokeTest.js",
+    "test:rbac": "node --test tests/rbacRules.test.js",
+    "start": "set NODE_ENV=production&& node server.js"
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "ticketing",
+    "asset-management"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb-memory-server-core": "^11.0.1",
+    "mongoose": "^9.3.3",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
