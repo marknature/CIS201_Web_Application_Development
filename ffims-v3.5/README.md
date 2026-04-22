@@ -1,7 +1,8 @@
-# FFIMS — Shift & Workforce Scheduling Module (v3 — Design Framework Applied)
+# FFIMS — Shift & Workforce Scheduling Module (v3.5 — Backend + Integration)
 
 ![Dashboard](https://github.com/marknature/CIS201_Web_Application_Development/blob/main/Version_3-FFIMS_Scheduling/Screenshot%202026-04-19%20230758.png)
-Version 3 was done after 10 April 2026.
+![integration](https://github.com/marknature/CIS201_Web_Application_Development/blob/main/Version_3-FFIMS_Scheduling/Screenshot%202026-04-22%060046.png)
+Version 3.5 was done before 18 April 2026.
 <br><br/>
 Next.js 14 web application for Africa University's Fleet and Facilities Unit.
 UI rebuilt to spec from **Group P5 UI Design Framework** (Red `#CC0000` · Black `#1A1A1A` · White · Inter).
